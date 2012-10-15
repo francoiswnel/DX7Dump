@@ -1,0 +1,38 @@
+TODO
+
+- Upload to sourceforge.
+  V Move to devel dir
+  V Add a README and TODO
+  - Create a git repo
+  - Set up on sourceforge and upload.
+- Provide an option to dump a single patch from a bank.  E.g. "-p 2"
+  This will turn on -l.
+  - Option is in processArgs() and "patch" but it is not yet used.
+    Need to update Format() to honor it.
+- Handle multiple files.
+- Handle file format variations.  Look around to see what variations
+  there are and decide whether we care.  As an example, we could run 
+  through a file looking for F0 before processing.
+- Write a compare program to identify dupes in a bank.  (ignore names)
+- Write a reverse dump program so we can edit the dump and send it back.
+- CSV option to dump a huge set of files in a spreadsheet-friendly way:
+    filename, patch #, patch name
+- Search feature to search for a string in names in a large number of files.
+  Will print the filename, patch number, and patch name for each name
+  found.  Case-insensitive search.
+
+DONE
+V Handle the -l option
+  - See acpid.c::handle_cmdline().
+  - getopt_long() is the function.
+  - See processArgs() in here.  Finish it.
+V Overlay the buffer with structs.
+V Format the structs.
+V Coarse verification.
+V Verify that all of the parameters are being displayed properly.
+  Modify them on the DX7 and dump them to make sure they match.
+  Especially the bitfields.  They are the worst.
+  V OperatorPacked bitfields
+  V VoicePacked bitfields
+V Fix frequency fine in ratio mode.  It is wrong.
+
