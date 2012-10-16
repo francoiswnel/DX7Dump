@@ -453,7 +453,7 @@ int main(int argc, char *argv[])
         return 1;
 
     // Format the bank
-    Format(sysex, argv[1]);
+    Format(sysex, argv[0]);
 
     fclose(file);
 
