@@ -1,10 +1,5 @@
 TODO
 
-- Upload to sourceforge.
-  V Move to devel dir
-  V Add a README and TODO
-  - Create a git repo
-  - Set up on sourceforge and upload.
 - Provide an option to dump a single patch from a bank.  E.g. "-p 2"
   This will turn on -l.
   - Option is in processArgs() and "patch" but it is not yet used.
@@ -13,7 +8,6 @@ TODO
 - Handle file format variations.  Look around to see what variations
   there are and decide whether we care.  As an example, we could run 
   through a file looking for F0 before processing.
-- Write a compare program to identify dupes in a bank.  (ignore names)
 - Write a reverse dump program so we can edit the dump and send it back.
 - CSV option to dump a huge set of files in a spreadsheet-friendly way:
     filename, patch #, patch name
@@ -22,6 +16,13 @@ TODO
   found.  Case-insensitive search.
 
 DONE
+V Upload to sourceforge.
+  V Move to devel dir
+  V Add a README and TODO
+  V Create a git repo
+  V Set up on sourceforge and upload.
+V Write a compare program to identify dupes in a bank.  (ignore names)
+  - Implemented as the "-f" option.  Find dupes.
 V Handle the -l option
   - See acpid.c::handle_cmdline().
   - getopt_long() is the function.

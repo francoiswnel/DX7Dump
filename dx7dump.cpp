@@ -28,6 +28,9 @@ const char *version = "1.00";
 // "-l" for long listing
 bool longListing = false;
 
+// "-f" to find duplicate patches
+bool findDupes = false;
+
 // "-p" to specify patch.  -1 means all.
 int patch = -1;
 
@@ -203,6 +206,7 @@ int processOpts(int *argc, char ***argv)
 {
 	struct option opts[] = {
 		{ "long", 0, 0, 'l' },
+		{ "find-dupes", 0, 0, 'f' },
 		{ "patch", 1, 0, 'p' },
 		{ "version", 0, 0, 'v' },
 		{ "help", 0, 0, 'h' },
@@ -210,13 +214,16 @@ int processOpts(int *argc, char ***argv)
 	};
 	
 	for (;;) {
-		int i = getopt_long(*argc, *argv, "lp:vh", opts, NULL);
+		int i = getopt_long(*argc, *argv, "lfp:vh", opts, NULL);
 		if (i == -1)
 			break;
 			
 		switch (i) {
 		case 'l':
 			longListing = true;
+			break;
+		case 'f':
+			findDupes = true;
 			break;
 		case 'p':
 			patch = strtol(optarg, NULL, 0);
@@ -419,6 +426,26 @@ void Format(const DX7Sysex *sysex, const char *filename)
 
 // ***************************************************************************
 
+int FindDupes(const DX7Sysex *sysex)
+{
+    // For each patch
+    for (int i = 0; i < 31; ++i)
+    {
+        // For each patch after that patch
+        for (int j = i + 1; j < 32; ++j)
+        {
+            // memcmp the patches
+            // Subtract 10 to remove the name from the diff.
+            int rc = memcmp(&(sysex->voices[i]), &(sysex->voices[j]), 
+                            sizeof(VoicePacked) - 10);
+            if (rc == 0)
+                printf("Found dupe: %d and %d\n", i+1, j+1);
+        }
+    }
+}
+
+// ***************************************************************************
+
 int main(int argc, char *argv[])
 {
     processOpts(&argc, &argv);
@@ -439,6 +466,7 @@ int main(int argc, char *argv[])
     const unsigned sysexSize = 4104;
     unsigned char buffer[sysexSize];
     const size_t size = fread(buffer, sysexSize, 1, file);
+    fclose(file);
 
     if (size != 1)
     {
@@ -455,7 +483,8 @@ int main(int argc, char *argv[])
     // Format the bank
     Format(sysex, argv[0]);
 
-    fclose(file);
+    if (findDupes)
+        FindDupes(sysex);
 
     return 0;
 }
