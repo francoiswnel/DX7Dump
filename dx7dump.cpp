@@ -308,7 +308,7 @@ int Verify(const DX7Sysex *sysex)
     sum &= 0x7F;
     if (sum != sysex->checksum)
     {
-        printf("CHECKSUM FAILED\n");
+        printf("CHECKSUM FAILED: Should have been 0x%X\n", sum);
         return 1;
     }
     
