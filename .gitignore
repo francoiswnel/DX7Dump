@@ -1,4 +1,2 @@
-a.out
-dx7dump
-*~
-
+.idea/
+/cmake-build-*/
