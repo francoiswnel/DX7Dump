@@ -28,16 +28,16 @@ I've made the following changes in this fork:
 
 # Original Readme by Ted Felix
 
-Yamaha DX7 Sysex Dump
-Copyright 2012, Ted Felix (www.tedfelix.com)
-License: GPLv3+
+    Yamaha DX7 Sysex Dump
+    Copyright 2012, Ted Felix (www.tedfelix.com)
+    License: GPLv3+
+    
+    Takes a Yamaha DX7 sysex file and formats it as human readable text.
+    The format is also conducive to using diff (or meld) to examine differences
+    between patches.
+    
+    Based on info from:
+    http://homepages.abdn.ac.uk/mth192/pages/dx7/sysex-format.txt
 
-Takes a Yamaha DX7 sysex file and formats it as human readable text.
-The format is also conducive to using diff (or meld) to examine differences
-between patches.
-
-Based on info from:
-http://homepages.abdn.ac.uk/mth192/pages/dx7/sysex-format.txt
-
-Build:
-  g++ -o dx7dump dx7dump.cpp
+    Build:
+      g++ -o dx7dump dx7dump.cpp
