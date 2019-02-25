@@ -20,6 +20,7 @@
 #include <getopt.h>
 #include <math.h>
 #include <unistd.h>
+#include <cstring>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
